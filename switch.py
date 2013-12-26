@@ -20,7 +20,7 @@ userKey = "user"
 hostKey = "host"
 portKey = "port"
 sshKeyKey = "key"
-json_file = 'ssh_data.json'
+json_file = "ssh_data.json"
 def add_connection(data_dict):
     print("What would you like to name this connection?")
     name = raw_input()
@@ -83,6 +83,9 @@ def remove_connection(data):
 
 while (True):
     data = []
+    home = os.path.expanduser("~")
+    json_file = home + "/" + json_file
+    print(json_file)
     try:
         json_data = open(json_file)
         data = json.load(json_data)
@@ -91,7 +94,7 @@ while (True):
         print("[+] Add Connection")
         print("[-] Remove Connection")
         print("[q] quit")
-    except IOError:
+    except IOError as e:
         print(colored("Could not find any saved connections", "red"))
         print("[+] Add Connection")
         print("[q] quit")
